@@ -10,7 +10,7 @@ app.set('views','./views');
 app.set('view engine','pug');
 
 
-//app.use(require("./loggging.js"));
+app.use(require("./loggging.js"));
 app.use(require("morgan")("dev"));
 app.use(express.static('public'));
 app.use(favicon(__dirname+"/public/favicon.ico"));
@@ -51,6 +51,6 @@ app.use('/admin/rooms',roomRouter);
 var apiRouter=require("./api");
 app.use('/api',apiRouter);
 
-app.listen(3000,function () {
+app.listen(process.env.PORT || 3000,function () {
     console.log('listening at 3000');
 });

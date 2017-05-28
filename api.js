@@ -13,31 +13,42 @@ router.get('/rooms', function (req, res) {
 });
 
 router.route('/rooms/:roomId/messages')
-    .get(function (req, res) {
+    .all(function (req, res, next) {
         var roomId=req.params.roomId;
         db.connect
-            .then(() => db.Message.find({roomId:roomId}).exec())
-            .then(messages => res.json(messages));
+        .then(() => db.Room.findById(roomId).exec())
+        .then(room=> {
+            if(!room)res.sendStatus(404);return;
+            res.locals.room=room;
+            next();
+        });
 
-    }).post(function (req, res) {
+    })
+    .get(function (req, res) {
+        var room = res.locals.room;
+        db.connect
+            .then(() => db.Message.find({roomId:room._id}).exec())
+            .then(messages => res.json({room,messages}));
 
-    var roomId=req.params.roomId;
-    db.connect
-        .then(() => db.Room.find({_id:roomId}).exec())
-        .then(room => {if (!room) res.sendStatus(404);return;});
+    })
+    .post(function (req, res) {
 
-    var message={
+        var roomId=req.params.roomId;
+        var message={
         roomId:roomId,
         userId:req.user._id,
         text:req.body.text
-    };
-    db.connect.then(() => db.Message.insert(message).exec()).then(() =>  res.sendStatus(200));
+        };
+        db.connect
+            .then(() => db.Message.insert(message).exec())
+            .then(() =>  res.sendStatus(200));
 
-    }).delete(function (req, res){
+    })
+    .delete(function (req, res){
 
-    var roomId=req.params.roomId;
-    db.connect
-        .then(() => db.Message.remove({roomId:roomId}).exec())
-        .then(() => res.sendStatus(200));
+        var roomId=req.params.roomId;
+        db.connect
+             .then(() => db.Message.find({roomId:roomId}).exec())
+             .then(() => res.sendStatus(200));
 
-});
+    });
