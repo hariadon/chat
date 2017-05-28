@@ -1,0 +1,29 @@
+extends ../layout
+block content
+    h1 welcome to chat app
+    a.btn.btn-primary(href="/admin/users/add") create new user
+    h1 Chat Users
+    table.table.table-striped
+        thead
+            tr
+                th name
+                th roles
+                th city
+                th state
+                th edit
+                th delete
+        tbody
+            each user in users
+                tr
+                    td=user.name
+                    td=user.roles
+                    td=user.address.city
+                    td=user.address.state
+                    td(style="width:50px")
+                        a(href="/admin/users/update/"+user._id)
+                            span.glyphicon.glyphicon-pencil
+                    td(style="width:50px")
+                        a(href="/admin/users/delete/"+user._id)
+                            span.glyphicon.glyphicon-trash
+    a.btn.btn-default(href="/") back
+

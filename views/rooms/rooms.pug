@@ -1,0 +1,24 @@
+extends ../layout
+block content
+    h1 welcome to chat app
+    a.btn.btn-primary(href="/admin/rooms/add") create new chat room
+    h1 Chat Rooms
+    table.table.table-striped
+        thead
+            tr
+                th id
+                th name
+                th edit
+                th delete
+        tbody
+            each room in rooms
+                tr
+                    td=room.id
+                    td=room.name
+                    td(style="width:50px")
+                        a(href="/admin/rooms/update/"+room.id)
+                            span.glyphicon.glyphicon-pencil
+                    td(style="width:50px")
+                        a(href="/admin/rooms/delete/"+room.id)
+                            span.glyphicon.glyphicon-trash
+    a.btn.btn-default(href="/") back
