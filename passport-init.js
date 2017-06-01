@@ -1,7 +1,6 @@
 var passport=require("passport");
 var LocalStrategy=require("passport-local").Strategy;
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
-var _=require("lodash");
 var db = require("./data/chatDB");
 
 /*passport.use(new GoogleStrategy({
@@ -27,23 +26,18 @@ app.get('/auth/google/callback',
     });*/
 
 passport.use(new LocalStrategy(function (username, password, done) {
-    db.connect.then(function(){
-        return db.User.find().exec();
-    }).then(function (users) {
-       var user= _.find(users, u => u.name === username);
-        if (!user||user.password!==password) {
-            return done(null, false, { message: 'Incorrect username or password' });
-        }
-        done(null,user);
-    });
-
+   db.User.findOne({name:username, password:password}).exec()
+       .then(function (user) {
+           if (!user) return done(null, false, { message: 'Incorrect username or password' });
+           done(null,user);
+       });
 }));
 
 passport.serializeUser(function(user, done) {
-    done(null, user);
+    done(null, user._id);
 });
 
-passport.deserializeUser(function(user, done) {
-    //var user=_.find(users,u=>u.contact.mobile===id);
-        done(null, user);
+passport.deserializeUser(function(id, done) {
+    db.User.findById(id).exec()
+        .then(user => done(null, user));
 });

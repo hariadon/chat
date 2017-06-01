@@ -1,6 +1,5 @@
 var express=require("express");
 var passport=require("passport");
-var _=require("lodash");
 var flash = require('connect-flash');
 var db = require('./data/chatDB');
 
@@ -11,7 +10,7 @@ router.use(flash());
 
 
 router.get('/login', function (req, res, next) {
-    if(req.app.get("env")==="development") {
+ /*   if(req.app.get("env")==="development") {
         db.connect
         .then(() => db.User.findOne({name: 'hari'}).exec())
         .then(user => {
@@ -21,7 +20,7 @@ router.get('/login', function (req, res, next) {
             });
         });
     }
-    else res.render("login",{title:"Login"});
+    else*/ res.render("login",{title:"Login"});
 });
 
 router.post('/login',

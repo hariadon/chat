@@ -1,26 +1,90 @@
 doctype html
 html(lang='en')
     head
-        title=title
-        link(rel='stylesheet' ,href='/css/bootstrap.min.css')
-        link(rel='stylesheet' ,href='/style.css')
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        title Login
+        link(rel='stylesheet', href='/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/style.css')
+        script(src="/jquery.min.js", type="text/javascript")
+        script(src="/js/bootstrap.min.js", type="text/javascript")
     body
         nav.navbar.navbar-inverse.navbar-fixed-top
             .container
-                #navbar.collapse.navbar-collapse
-                    ul.nav.navbar-nav
-                        li.active
-                            a(href='/login') Welcome
-        container
-            .main-content
-                .col-md-4.col-md-offset-4
-                    form(method="post", action="/login")
-                        .form-group
-                            lable UserName:
-                            input.form-control(type="text", name="username")
-                        .form-group
-                            lable Password:
-                            input.form-control(type="text", name="password")
-                        .form-group
-                            input.btn.btn-primary(type="submit", value="Log In")
+                .navbar-header
+                    button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+                        span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.navbar-brand(href='#') MyChat
+
+        .container
+            #loginbox.mainbox.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2(style='margin-top:50px;')
+                .panel.panel-info
+                    .panel-heading
+                        .panel-title Sign In
+                    .panel-body(style='padding-top:30px')
+                        #login-alert.alert.alert-danger.col-sm-12(style='display:none')
+
+                        form#loginform.form-horizontal(role='form', method='post', action='/login')
+                            .input-group(style='margin-bottom: 25px')
+                                span.input-group-addon
+                                    i.glyphicon.glyphicon-user
+                                input#login-username.form-control(type='text', name='username', value='', placeholder='username...')
+                            .input-group(style='margin-bottom: 25px')
+                                span.input-group-addon
+                                    i.glyphicon.glyphicon-lock
+                                input#login-password.form-control(type='password', name='password', placeholder='password...')
+                            // Button
+                            .form-group(style='margin-top:10px')
+                                .col-sm-12.controls
+                                    button#btn-login.btn.btn-success(type='submit') Login
+                            .form-group
+                                .col-md-12.control
+                                    .box-hr Don't have an account! #[a(href='#', onclick="$('#loginbox').hide(); $('#signupbox').show()") Sign Up Here]
+
+
+
+
+            #signupbox.mainbox.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2(style='display:none; margin-top:50px')
+                .panel.panel-info
+                    .panel-heading
+                        .panel-title Sign Up
+                    .panel-body
+                        form#signupform.form-horizontal(method='post', action='/signup', role='form')
+                            #signupalert.alert.alert-danger(style='display:none')
+
+                            .form-group
+                                label.col-md-3.control-label(for='username') User Name
+                                .col-md-9
+                                    input.form-control(type='text', id="username", name='username', placeholder='username...')
+                            .form-group
+                                label.col-md-3.control-label(for='email') Email
+                                .col-md-9
+                                    input.form-control(type='text', id="email", name='email', placeholder='email...')
+                            .form-group
+                                label.col-md-3.control-label(for='password') Password
+                                .col-md-9
+                                    input.form-control(type='password', id="password", name='password', placeholder='password...')
+                            .form-group
+                                label.col-md-3.control-label(for='confirm') Confirm
+                                .col-md-9
+                                    input.form-control(type='text', id="confirm", name='confirm', placeholder='confirm password...')
+                            // Button
+                            .form-group
+                                .col-md-offset-3.col-md-9
+                                    button#btn-signup.btn.btn-info(type='submit')
+                                        i.icon-hand-right
+                                        |    Sign Up
+                            .form-group
+                                .col-md-12.control
+                                    .box-hr Already have an account? #[a(href='#', onclick="$('#loginbox').show(); $('#signupbox').hide()") Sign In Here]
+
+        // Footer
+        footer.footer
+            .container
+                p.text-muted Created By © hariadon.
+
 

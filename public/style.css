@@ -1,6 +1,29 @@
-body{
+html {
     padding-top:50px;
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 30px;
+    background-color:#fafafa;
+}
+.footer {
+    /*Set as per inverse-navbar */
+    background-color: #222;
+    border-color: #080808;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 30px;
+
 }
 .main-content{
     padding:40px 15px;
+}
+.box-hr{
+    border-top: 1px solid#888;
+    padding-top:15px;
+    font-size:85%;
 }

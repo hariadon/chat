@@ -1,7 +1,7 @@
-var mongoose = require("mongoose");
 var url = 'mongodb://hariadon:hariadon@ds149221.mlab.com:49221/hari';
-
+var mongoose = require("mongoose");
 mongoose.Promise=global.Promise;
+
 var connect=mongoose.connect(url);
 
 mongoose.set('debug',true);

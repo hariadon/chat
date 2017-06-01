@@ -1,4 +1,3 @@
-var _ = require("lodash");
 var express = require("express");
 var db = require("../data/chatDB");
 
@@ -10,20 +9,20 @@ router.use(function (req, res, next) {
     res.redirect('/login');
 });
 
-router.get('/', function (req, res) {
-    db.connect
-        .then(() => db.User.find().exec())
-        .then(users => res.render("users/users",{title:'Users',users:users}));
+router.get('/', function (req, res, next) {
+ db.User.find().exec()
+        .then(users => res.render("users/users",{title:'Users',users:users}))
+        .catch(next);
 });
 
 router.route('/add')
     .get(function (req, res) {
         res.render("users/add");
-
-    }).post(function (req, res) {
-    var user = new db.User(req.body);
-    user.save().then(() => res.redirect("/admin/users") );
-
+    })
+    .post(function (req, res, next) {
+        var user = new db.User(req.body);
+        user.save().then(() => res.redirect("/admin/users") )
+        .catch(next);
     });
 
 router.route('/update/:userId')
@@ -31,22 +30,24 @@ router.route('/update/:userId')
         var userId=req.params.userId;
         db.User.findById(userId).exec()
            .then(user =>  {
-            if(!user)res.sendStatus(404);return;
+            if(!user)return res.sendStatus(404);
             res.locals.user=user;
             next();
-           });
+           }).catch(next);
     })
-    .get(function (req, res) {
+    .get(function (req, res, next) {
         res.render("users/update",res.locals.user);
     })
-    .post(function(req, res){
+    .post(function(req, res, next){
         var user = new db.User(req.body);
-        db.User.update(user).exec()
-            .then(() => res.redirect("/admin/users"));
+        db.User.findByIdAndUpdate(res.locals.user._id,user).exec()
+            .then(() => res.redirect("/admin/users"))
+            .catch(next);
     });
 
-router.get('/delete/:userId',function(req, res){
+router.get('/delete/:userId',function(req, res, next){
         var userId=req.params.userId;
         db.User.findByIdAndRemove(userId).exec()
-            .then(() => res.redirect("/admin/users"));
+            .then(() => res.redirect("/admin/users"))
+            .catch(next);
     });

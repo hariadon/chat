@@ -27,6 +27,7 @@ app.use(passport.session());
 
 //require("express-debug")(app,{});
 
+app.use(require("./signup"));
 
 var authRouter=require("./auth");
 app.use(authRouter);
@@ -36,7 +37,8 @@ app.use(function (req, res, next) {
         res.locals.user=req.user;return next();
     }
     res.redirect('/login');
-})
+});
+
 app.get('/',function (req,res) {
     res.render('home',{title:'Home'});
 });

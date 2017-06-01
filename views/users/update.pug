@@ -1,24 +1,31 @@
 extends ../layout
+
 block content
     h1 Update User
-    form(method="post")
+    form(method="post" a)
         fieldset.form-group
             label(for="name") Name:
-                input.form-control(name="name",type="text" ,value="#{user.name||''}")
-            label(for="role") Role:
-                input.form-control(name="admin",type="checkbox")
-                input.form-control(name="moderator",type="checkbox")
+            input.form-control(name="name", id="name", type="text", value="#{user.name||''}")
+            label Roles:
+            .form-check
+                label.form-check-label
+                    input.form-check-input(type='checkbox', name="roles", value='admin')
+                    |    Admin
+            .form-check
+                label.form-check-label
+                    input.form-check-input(type='checkbox', name="roles", value='user')
+                    |     User
             label(for="mobile") Mobile:
-                input.form-control(name="mobile",type="text" ,value="#{user.mobile||''}")
+            input.form-control(name="mobile", id="mobile", type="text", value="#{user.mobile||''}")
             label(for="email") Email:
-                input.form-control(name="email",type="text", value="#{user.email||''}")
+            input.form-control(name="email", id="email", type="text", value="#{user.email||''}")
             label(for="address") Address:
-                textarea.form-control(name="lines", rows="2", value="#{user.lines||''}")
+            textarea.form-control(name="address", id="address", rows="2", value="#{user.address||''}")
             label(for="city") City:
-                input.form-control(name="city",type="text", value="#{user.city||''}" )
+            input.form-control(name="city", id="city", type="text", value="#{user.city||''}" )
             label(for="state") State:
-                input.form-control(name="state",type="text", value="#{user.state||''}")
+            input.form-control(name="state", id="state" type="text", value="#{user.state||''}")
             label(for="pincode") Pin Code:
-                input.form-control(name="pincode",type="text", value="#{user.pincode||''}")
+            input.form-control(name="pincode", id="pincode", type="text", value="#{user.pincode||''}")
         button.btn.btn-primary(type="submit") save
         a.btn.btn-default(href="/admin/users") cancel
