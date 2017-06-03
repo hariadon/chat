@@ -1,6 +1,6 @@
 extends ../layout
 block content
-    a.btn.btn-primary(href="/admin/users/add") create new user
+
     h1 Chat Users
     table.table.table-striped
         thead
@@ -24,5 +24,6 @@ block content
                     td(style="width:50px")
                         a(href="/admin/users/delete/"+user._id)
                             span.glyphicon.glyphicon-trash
+    a.btn.btn-primary(href="/admin/users/add") create new user
     a.btn.btn-default(href="/") back
 

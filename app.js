@@ -1,11 +1,13 @@
 var express=require("express");
 var favicon = require("express-favicon");
 var bodyParser=require("body-parser");
+var compression = require("compression");
 var passport=require("passport");
 require("./passport-init");
 
 
 var app=express();
+app.use(compression());
 app.set('views','./views');
 app.set('view engine','pug');
 
@@ -27,7 +29,7 @@ app.use(passport.session());
 
 //require("express-debug")(app,{});
 
-app.use(require("./signup"));
+
 
 var authRouter=require("./auth");
 app.use(authRouter);
@@ -39,10 +41,11 @@ app.use(function (req, res, next) {
     res.redirect('/login');
 });
 
+
 app.get('/',function (req,res) {
     res.render('home',{title:'Home'});
 });
-
+app.use('/user',require("./user"));
 
 var userRouter=require("./admin/users");
 app.use('/admin/users',userRouter);

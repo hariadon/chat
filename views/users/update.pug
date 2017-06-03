@@ -2,30 +2,32 @@ extends ../layout
 
 block content
     h1 Update User
-    form(method="post" a)
+    form(method="post")
         fieldset.form-group
             label(for="name") Name:
-            input.form-control(name="name", id="name", type="text", value="#{user.name||''}")
+            input.form-control(name="name", id="name", type="text", value=(usr.name||''))
+            label(for="password") Password:
+            input.form-control(name="password", id="password", type="text", value=(usr.password || ''))
             label Roles:
             .form-check
                 label.form-check-label
-                    input.form-check-input(type='checkbox', name="roles", value='admin')
+                    input.form-check-input(type='checkbox', name="roles", value='admin', checked=(usr.roles.indexOf("admin")))
                     |    Admin
             .form-check
                 label.form-check-label
-                    input.form-check-input(type='checkbox', name="roles", value='user')
+                    input.form-check-input(type='checkbox', name="roles", value='user' checked)
                     |     User
             label(for="mobile") Mobile:
-            input.form-control(name="mobile", id="mobile", type="text", value="#{user.mobile||''}")
+            input.form-control(name="mobile", id="mobile", type="text", value=(usr.mobile||''))
             label(for="email") Email:
-            input.form-control(name="email", id="email", type="text", value="#{user.email||''}")
+            input.form-control(name="email", id="email", type="text", value=(usr.email||''))
             label(for="address") Address:
-            textarea.form-control(name="address", id="address", rows="2", value="#{user.address||''}")
+            textarea.form-control(name="address", id="address", rows="2", value=(usr.address||''))
             label(for="city") City:
-            input.form-control(name="city", id="city", type="text", value="#{user.city||''}" )
+            input.form-control(name="city", id="city", type="text", value=(usr.city||'') )
             label(for="state") State:
-            input.form-control(name="state", id="state" type="text", value="#{user.state||''}")
+            input.form-control(name="state", id="state" type="text", value=(usr.state||''))
             label(for="pincode") Pin Code:
-            input.form-control(name="pincode", id="pincode", type="text", value="#{user.pincode||''}")
+            input.form-control(name="pincode", id="pincode", type="text", value=(usr.pincode||''))
         button.btn.btn-primary(type="submit") save
         a.btn.btn-default(href="/admin/users") cancel

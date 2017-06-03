@@ -35,13 +35,13 @@ router.route('/rooms/:roomId/messages')
                         text:req.body.text
                       };
         new db.Message(message).save()
-            .then(() =>  res.redirect(req.baseUrl))
+            .then(() =>  res.sendStatus(200))
             .catch(next);
 
     })
     .delete(function (req, res, next){
         db.Message.remove({roomId:req.params.roomId})
-            .then(() =>  res.redirect(req.baseUrl))
+            .then(() => res.sendStatus(200))
             .catch(next);
 
     });

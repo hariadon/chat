@@ -6,7 +6,7 @@ module.exports = router;
 
 router.use(function (req, res, next) {
     if(req.user.roles.indexOf("admin")>-1)return next();
-    res.redirect('/login');
+    res.redirect('/');
 });
 
 router.get('/', function (req, res, next) {
@@ -39,7 +39,8 @@ router.route('/update/:roomId')
         res.render("rooms/update",res.locals.room);
     })
     .post(function(req, res, next){
-        var room = new db.Room(req.body);
+        var room = {};
+        room.name = req.body.name;
         db.Room.findByIdAndUpdate(res.locals.room._id, room).exec()
             .then(() => res.redirect("/admin/rooms"))
             .catch(next);

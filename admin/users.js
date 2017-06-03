@@ -1,12 +1,13 @@
 var express = require("express");
 var db = require("../data/chatDB");
+var util = require("../public/util");
 
 var router = express.Router();
 module.exports = router;
 
 router.use(function (req, res, next) {
     if(req.user.roles.indexOf("admin")>-1)return next();
-    res.redirect('/login');
+    res.redirect('/');
 });
 
 router.get('/', function (req, res, next) {
@@ -14,6 +15,8 @@ router.get('/', function (req, res, next) {
         .then(users => res.render("users/users",{title:'Users',users:users}))
         .catch(next);
 });
+
+
 
 router.route('/add')
     .get(function (req, res) {
@@ -31,16 +34,17 @@ router.route('/update/:userId')
         db.User.findById(userId).exec()
            .then(user =>  {
             if(!user)return res.sendStatus(404);
-            res.locals.user=user;
+            res.locals.usr=user;
             next();
            }).catch(next);
     })
     .get(function (req, res, next) {
-        res.render("users/update",res.locals.user);
+        res.render("users/update",res.locals.usr);
     })
     .post(function(req, res, next){
-        var user = new db.User(req.body);
-        db.User.findByIdAndUpdate(res.locals.user._id,user).exec()
+        var user = {};
+        util.setParams(user, req);
+        db.User.findByIdAndUpdate(res.locals.usr._id,user).exec()
             .then(() => res.redirect("/admin/users"))
             .catch(next);
     });

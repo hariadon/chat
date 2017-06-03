@@ -23,6 +23,7 @@ $(function(){
         data:{text:$('#message').val()},
          success: function () {
              getMessages();
+             $('#message').val('');
          }
      });
  });
@@ -32,7 +33,7 @@ $(function(){
             type: "DELETE",
             url: "/api/rooms/"+roomId+"/messages",
             success: function () {
-                $('#messages').empty();
+                $('#messages').val('');
             }
         });
     });
@@ -50,7 +51,7 @@ $(function(){
                 $('#roomName').text("messages from "+data.room.name);
                 var messages="";
                $.each(data.msgs, function (i,msg) {
-                  if(msg) messages+= msg.username+" >>> "+msg.text+"\r";
+                  if(msg) messages+= msg.username+":   "+msg.text+"\r";
                 });
                 $('#messages').val(messages);
             }

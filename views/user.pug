@@ -1,0 +1,25 @@
+extends ./layout
+
+block content
+    h1 Update Your Details
+    form(method="post")
+        fieldset.form-group
+            label(for="name") Name:
+            input.form-control(name="name", id="name", type="text", value=(user.name||''))
+            label(for="password") Password:
+            input.form-control(name="password", id="password", type="text", value=(user.password || ''))
+            label(for="mobile") Mobile:
+            input.form-control(name="mobile", id="mobile", type="text", value=(user.mobile||''))
+            label(for="email") Email:
+            input.form-control(name="email", id="email", type="text", value=(user.email||''))
+            label(for="address") Address:
+            textarea.form-control(name="address", id="address", rows="2", value=(user.address||''))
+            label(for="city") City:
+            input.form-control(name="city", id="city", type="text", value=(user.city||'') )
+            label(for="state") State:
+            input.form-control(name="state", id="state" type="text", value=(user.state||''))
+            label(for="pincode") Pin Code:
+            input.form-control(name="pincode", id="pincode", type="text", value=(user.pincode||''))
+        button.btn.btn-primary(type="submit") save
+        a.btn.btn-default(href="/") cancel
+

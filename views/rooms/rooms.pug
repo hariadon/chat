@@ -1,13 +1,12 @@
 extends ../layout
 block content
-    a.btn.btn-primary(href="/admin/rooms/add") create new chat room
     h1 Chat Rooms
     table.table.table-striped
         thead
             tr
-                th name
-                th edit
-                th delete
+                th Name
+                th Edit
+                th Delete
         tbody
             each room in rooms
                 tr
@@ -18,4 +17,5 @@ block content
                     td(style="width:50px")
                         a(href="/admin/rooms/delete/"+room.id)
                             span.glyphicon.glyphicon-trash
+    a.btn.btn-primary(href="/admin/rooms/add") create new chat room
     a.btn.btn-default(href="/") back
