@@ -20,12 +20,17 @@ block content
             label(for="email") Email:
             input.form-control(name="email", id="email", type="text", value="")
             label(for="address") Address:
-            textarea.form-control(name="address", id="address", rows="2", value="")
+            textarea.form-control(name="address", id="address", rows="2")
             label(for="city") City:
             input.form-control(name="city", id="city", type="text", value="" )
             label(for="state") State:
             input.form-control(name="state", id="state" type="text", value="")
             label(for="pincode") Pin Code:
             input.form-control(name="pincode", id="pincode", type="text", value="")
-        button.btn.btn-default.btn-primary(type="submit") create
-        a.btn.btn-default(href="/admin/users") cancel
+        .btn-panel
+            button.col-lg-3.btn.send-message-btn(type='submit', role='button')
+                i.glyphicon.glyphicon-plus-sign
+                |  Create
+            a.col-lg-4.text-right.btn.send-message-btn.pull-right(href='/admin/users', role='button')
+                i.glyphicon.glyphicon-backward
+                |  Back

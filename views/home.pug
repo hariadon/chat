@@ -1,16 +1,17 @@
 extends layout
 block content
-    div.row
-        div.col-md-4
-            h3 Rooms
-            div#rooms.list-group
-        div.col-md-8
-            h3#roomName
-            textarea#messages.form-control(rows="12")
-            button.btn.btn-default#delete delete all messages
-            h3 add a new message
-            textarea#message.form-control(rows="2")
-            button.btn.btn-primary#add post
+            .row
+                #rooms.conversation-wrap.col-lg-3
+                .message-wrap.col-lg-8
+                    #messages.msg-wrap
+                        .send-wrap
+                    textarea#message.form-control.send-message(rows='3', placeholder='Write a reply...')
+                    .btn-panel
+                        a.col-lg-3.btn.send-message-btn(href='', role='button')
+                            i.glyphicon.glyphicon-plus-sign
+                            |  Add Files
+                        a#add.col-lg-4.text-right.btn.send-message-btn.pull-right(href='', role='button')
+                            i.glyphicon.glyphicon-send
+                            |  Send Message
 
-
-    script(src="/home.js", type="text/javascript")
+            script(src="/home.js", type="text/javascript")

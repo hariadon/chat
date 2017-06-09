@@ -24,9 +24,8 @@ router.post('/signup',function (req, res, next) {
 });
 
 router.get('/login', function (req, res, next) {
-    /*   if(req.app.get("env")==="development") {
-    db.connect
-    .then(() => db.User.findOne({name: 'hari'}).exec())
+    if(req.app.get("env")==="development") {
+   db.User.findOne({name: 'ved'}).exec()
     .then(user => {
     req.logIn(user, err => {
     if (err)return next(err);
@@ -34,7 +33,7 @@ router.get('/login', function (req, res, next) {
     });
     });
     }
-    else*/ res.render("login",{title:"Login"});
+    else res.render("login",{title:"Login"});
 });
 
 router.post('/login',

@@ -1,21 +1,28 @@
 extends ../layout
 block content
     h1 Chat Rooms
-    table.table.table-striped
+    table.table.table-responsive
         thead
             tr
                 th Name
+                th Info
                 th Edit
                 th Delete
         tbody
             each room in rooms
                 tr
                     td=room.name
+                    td=room.info
                     td(style="width:50px")
-                        a(href="/admin/rooms/update/"+room.id)
-                            span.glyphicon.glyphicon-pencil
+                        a(href="/admin/rooms/update/"+room.id, role="button")
+                            i.glyphicon.glyphicon-pencil
                     td(style="width:50px")
-                        a(href="/admin/rooms/delete/"+room.id)
-                            span.glyphicon.glyphicon-trash
-    a.btn.btn-primary(href="/admin/rooms/add") create new chat room
-    a.btn.btn-default(href="/") back
+                        a(href="/admin/rooms/delete/"+room.id, role="button")
+                            i.glyphicon.glyphicon-trash
+    .btn-panel
+        a.col-lg-3.btn.send-message-btn(href='/admin/rooms/add', role='button')
+            i.glyphicon.glyphicon-plus-sign
+            |  Create New Room
+        a.col-lg-4.text-right.btn.send-message-btn.pull-right(href='/', role='button')
+            i.glyphicon.glyphicon-backward
+            |  Back

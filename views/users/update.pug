@@ -11,7 +11,7 @@ block content
             label Roles:
             .form-check
                 label.form-check-label
-                    input.form-check-input(type='checkbox', name="roles", value='admin', checked=(usr.roles.indexOf("admin")))
+                    input.form-check-input(type='checkbox', name="roles", value='admin', checked=(usr.roles.indexOf("admin")!=-1))
                     |    Admin
             .form-check
                 label.form-check-label
@@ -22,12 +22,18 @@ block content
             label(for="email") Email:
             input.form-control(name="email", id="email", type="text", value=(usr.email||''))
             label(for="address") Address:
-            textarea.form-control(name="address", id="address", rows="2", value=(usr.address||''))
+            textarea.form-control(name="address", id="address", rows="2")=usr.address||''
             label(for="city") City:
             input.form-control(name="city", id="city", type="text", value=(usr.city||'') )
             label(for="state") State:
             input.form-control(name="state", id="state" type="text", value=(usr.state||''))
             label(for="pincode") Pin Code:
             input.form-control(name="pincode", id="pincode", type="text", value=(usr.pincode||''))
-        button.btn.btn-primary(type="submit") save
-        a.btn.btn-default(href="/admin/users") cancel
+
+        .btn-panel
+            button.col-lg-3.btn.send-message-btn(type='submit', role='button')
+                i.glyphicon.glyphicon-circle-arrow-right
+                |  Save
+            a.col-lg-4.text-right.btn.send-message-btn.pull-right(href='/admin/users', role='button')
+                i.glyphicon.glyphicon-backward
+                |  Cancel

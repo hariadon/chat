@@ -41,6 +41,7 @@ router.route('/update/:roomId')
     .post(function(req, res, next){
         var room = {};
         room.name = req.body.name;
+        room.info = req.body.info;
         db.Room.findByIdAndUpdate(res.locals.room._id, room).exec()
             .then(() => res.redirect("/admin/rooms"))
             .catch(next);

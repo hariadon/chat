@@ -1,6 +1,7 @@
 var express=require("express");
 var favicon = require("express-favicon");
 var bodyParser=require("body-parser");
+var flash = require("connect-flash");
 var compression = require("compression");
 var passport=require("passport");
 require("./passport-init");
@@ -26,7 +27,7 @@ app.use(bodyParser.json());
 app.use(require("express-session")({ secret: 'keyboard cat',  resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(flash());
 //require("express-debug")(app,{});
 
 
@@ -36,7 +37,8 @@ app.use(authRouter);
 
 app.use(function (req, res, next) {
     if(req.isAuthenticated()){
-        res.locals.user=req.user;return next();
+        res.locals.user=req.user;
+        return next();
     }
     res.redirect('/login');
 });

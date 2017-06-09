@@ -5,6 +5,13 @@ block content
         fieldset.form-group
             label(for="name") Name:
             input.form-control(id="name", name="name", type="text", value=room.name)
-            small.text-muted Give a meaningful name to your chat room
-        button.btn.btn-primary(type="submit") save chat room
-        a.btn.btn-default(href="/admin/rooms") cancel
+            label(for="info") Info:
+            input.form-control(id="info", name="info", type="text", value=room.info||"")
+            small.text-muted Provide some information about your chat room
+        .btn-panel
+            button.col-lg-3.btn.send-message-btn(type='submit', role='button')
+                i.glyphicon.glyphicon-circle-arrow-right
+                |  Save
+            a.col-lg-4.text-right.btn.send-message-btn.pull-right(href='/admin/rooms', role='button')
+                i.glyphicon.glyphicon-backward
+                |  Cancel

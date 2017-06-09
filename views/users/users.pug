@@ -2,7 +2,7 @@ extends ../layout
 block content
 
     h1 Chat Users
-    table.table.table-striped
+    table.table.table-responsive
         thead
             tr
                 th Name
@@ -19,11 +19,17 @@ block content
                     td=user.email
                     td=user.city
                     td(style="width:50px")
-                        a(href="/admin/users/update/"+user._id)
-                            span.glyphicon.glyphicon-pencil
+                        a(href="/admin/users/update/"+user._id, role="button")
+                            i.glyphicon.glyphicon-pencil
                     td(style="width:50px")
-                        a(href="/admin/users/delete/"+user._id)
-                            span.glyphicon.glyphicon-trash
-    a.btn.btn-primary(href="/admin/users/add") create new user
-    a.btn.btn-default(href="/") back
+                        a(href="/admin/users/delete/"+user._id, role="button")
+                            i.glyphicon.glyphicon-trash
+    .btn-panel
+        a.col-lg-3.btn.send-message-btn(href='/admin/users/add', role='button')
+            i.glyphicon.glyphicon-plus-sign
+            |  Create New User
+        a.col-lg-4.text-right.btn.send-message-btn.pull-right(href='/', role='button')
+            i.glyphicon.glyphicon-backward
+            |  Back
+
 
