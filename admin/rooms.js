@@ -5,7 +5,7 @@ var router = express.Router();
 module.exports = router;
 
 router.use(function (req, res, next) {
-    if(req.user.roles.indexOf("admin")>-1)return next();
+    if(req.user.roles.indexOf("admin")!=-1)return next();
     res.redirect('/');
 });
 

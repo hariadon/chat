@@ -24,7 +24,7 @@ router.post('/signup',function (req, res, next) {
 });
 
 router.get('/login', function (req, res, next) {
-    if(req.app.get("env")==="development") {
+   /* if(req.app.get("env")==="development") {
    db.User.findOne({name: 'ved'}).exec()
     .then(user => {
     req.logIn(user, err => {
@@ -33,7 +33,7 @@ router.get('/login', function (req, res, next) {
     });
     });
     }
-    else res.render("login",{title:"Login"});
+    else */res.render("login",{title:"Login"});
 });
 
 router.post('/login',

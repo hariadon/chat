@@ -26,6 +26,11 @@ block content
             input.form-control(name="state", id="state" type="text", value=(user.state||''))
             label(for="pincode") Pin Code:
             input.form-control(name="pincode", id="pincode", type="text", value=(user.pincode||''))
-        button.btn.btn-primary(type="submit") save
-        a.btn.btn-default(href="/") cancel
+        .btn-panel
+            button.col-lg-3.btn.send-message-btn(type='submit', role='button')
+                i.glyphicon.glyphicon-circle-arrow-right
+                |  Save
+            a.col-lg-4.text-right.btn.send-message-btn.pull-right(href='/', role='button')
+                i.glyphicon.glyphicon-backward
+                |  Cancel
 

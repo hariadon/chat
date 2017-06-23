@@ -28,16 +28,16 @@ app.get('/auth/google/callback',
 passport.use(new LocalStrategy(function (username, password, done) {
    db.User.findOne({name:username, password:password}).exec()
        .then(function (user) {
-           if (!user) return done(null, false, { message: 'Incorrect username or password' });
+           if (!user) return done(null, false, { error: 'Incorrect username or password' });
            done(null,user);
        });
 }));
 
 passport.serializeUser(function(user, done) {
-    done(null, user._id);
+    done(null, user._id+'@'+user.name);
 });
 
-passport.deserializeUser(function(id, done) {
-    db.User.findById(id).exec()
+passport.deserializeUser(function(u, done) {
+    db.User.findById(u.split('@')[0]).exec()
         .then(user => done(null, user));
 });

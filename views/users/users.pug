@@ -7,7 +7,6 @@ block content
             tr
                 th Name
                 th Roles
-                th Email
                 th City
                 th Edit
                 th Delete
@@ -16,7 +15,6 @@ block content
                 tr
                     td=user.name
                     td=user.roles
-                    td=user.email
                     td=user.city
                     td(style="width:50px")
                         a(href="/admin/users/update/"+user._id, role="button")

@@ -10,14 +10,16 @@ router.route('/update')
         res.render("user", res.locals.user);
     })
     .post(function (req, res, next) {
-        res.locals.user.save()
+        var user = {};
+        util.setParams(user, req);
+        db.User.findByIdAndUpdate(res.locals.user._id,user).exec()
             .then(user => {
                 req.logIn(user, err => {
                     if (err) return next(err);
                     return res.redirect('/');
                 });
             }).catch(err=> {
-                res.locals.errors=err.errors
+                res.locals.errors=err.errors;
                 res.redirect(req.baseUrl);
         });
 

@@ -6,7 +6,7 @@ var router = express.Router();
 module.exports = router;
 
 router.use(function (req, res, next) {
-    if(req.user.roles.indexOf("admin")>-1)return next();
+    if(req.user.roles.indexOf("admin")!=-1)return next();
     res.redirect('/');
 });
 
@@ -42,11 +42,13 @@ router.route('/update/:userId')
         res.render("users/update",res.locals.usr);
     })
     .post(function(req, res, next){
-        var user = {};
-        util.setParams(user, req);
+        var user = {}; util.setParams(user, req);
         db.User.findByIdAndUpdate(res.locals.usr._id,user).exec()
             .then(() => res.redirect("/admin/users"))
-            .catch(next);
+            .catch(err=> {
+                res.locals.errors=err.errors;
+                res.redirect(req.baseUrl);
+            });
     });
 
 router.get('/delete/:userId',function(req, res, next){

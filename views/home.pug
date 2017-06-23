@@ -7,11 +7,13 @@ block content
                         .send-wrap
                     textarea#message.form-control.send-message(rows='3', placeholder='Write a reply...')
                     .btn-panel
-                        a.col-lg-3.btn.send-message-btn(href='', role='button')
+                        a#add.col-lg-3.btn.send-message-btn(href='#', role='button')
                             i.glyphicon.glyphicon-plus-sign
                             |  Add Files
-                        a#add.col-lg-4.text-right.btn.send-message-btn.pull-right(href='', role='button')
+                        a#send.col-lg-4.text-right.btn.send-message-btn.pull-right(href='#', role='button')
                             i.glyphicon.glyphicon-send
                             |  Send Message
 
+
+            script(src="/socket.io.js", type="text/javascript")
             script(src="/home.js", type="text/javascript")

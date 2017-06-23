@@ -33,10 +33,11 @@ a{
     border-top: 1px solid#888;
     padding-top:15px;
     font-size:85%;
+    color:#080808;
 }
+.box-hr > a{color:#2a3c4c;}
 
-.conversation-wrap
-{
+.conversation-wrap {
     box-shadow: -2px 0 3px #ddd;
     padding:0;
     max-height: 400px;
