@@ -74,8 +74,7 @@ app.io.on('connection', function(socket){
                 roomId:msg.roomId,
                 userId:userinfo[0],
                 username:userinfo[1],
-                text:msg.text,
-                date:new Date()
+                text:msg.text
             };
         new db.Message(message).save()
             .then(m =>// send to all clients
